@@ -22,6 +22,7 @@ object tutorial2 {
 		game.addVisual(silvestre)
 		game.addVisual(pepita)
 		config.configurarTeclas()
+		game.onTick(800, "GRAVEDAD", {pepita.caer(1)} )
 	}
 
 }
