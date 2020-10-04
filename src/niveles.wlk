@@ -45,10 +45,15 @@ object config {
 	method configurarTeclas() {
 		keyboard.left().onPressDo({ pepita.irA(pepita.position().left(1))})
 		keyboard.right().onPressDo({ pepita.irA(pepita.position().right(1))})
+		keyboard.up().onPressDo({pepita.irA(pepita.position().up(1))})
+		keyboard.down().onPressDo({pepita.irA(pepita.position().down(1))})
+		keyboard.o().onPressDo({pepita.irA(game.origin())}) // si presionas la o vuelve al origen
+		keyboard.c().onPressDo({pepita.come(game.uniqueCollider(pepita))})
 	}
 
 	method configurarColisiones() {
 		game.onCollideDo(pepita, { algo => algo.teEncontro(pepita)})
+		game.onCollideDo(pepita, {algo2 => algo2.colisionaConSilvestre()})
 	}
 
 }

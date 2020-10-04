@@ -7,11 +7,15 @@ object pepita {
 	var property position = game.origin()
 
 	method image() {
-		return if (self.estaEnElNido()) "pepita-grande.png" else "pepita.png"
+		return if (self.estaEnElNido()){"pepita-grande.png"}else{
+		 if(self.colisionaConSilvestre() or self.estaCansada()){"pepita-gris.png" }
+		 else "pepita.png"
+	}
 	}
 
 	method come(comida) {
 		energia = energia + comida.energiaQueOtorga()
+		game.removeVisual(comida) // saca el elemento del tablero
 	}
 
 	method vola(kms) {
@@ -19,8 +23,10 @@ object pepita {
 	}
 
 	method irA(nuevaPosicion) {
+		if ((not self.estaCansada())){
 		self.vola(position.distance(nuevaPosicion))
 		position = nuevaPosicion
+		}
 	}
 
 	method estaCansada() {
@@ -30,6 +36,8 @@ object pepita {
 	method estaEnElNido() {
 		return position == nido.position()
 	}
+	
+	method colisionaConSilvestre() = position == silvestre.position()
 
 }
 
